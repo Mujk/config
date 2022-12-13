@@ -1,0 +1,6 @@
+import:
+  - ~/.config/alacritty/current-theme.yml # set theme
+
+window:
+  opacity: 0.8  # set transparency
+
