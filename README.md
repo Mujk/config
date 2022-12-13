@@ -1,7 +1,7 @@
 # config
 My config files
 
-### system
+### System
 - NixOS
 
 ### Terminal
