@@ -1,0 +1,17 @@
+[character]
+success_symbol = "[ᐅ](bold green)"
+error_symbol = "[❌](bold red)"
+
+
+# languages
+[elixir]
+format = '\[[$symbol($version \(OTP $otp_version\))]($style)\]'
+
+[golang]
+format = '\[[$symbol($version)]($style)\]'
+
+[python]
+format = '\[[${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style)\]'
+
+[rust]
+format = '\[[$symbol($version)]($style)\]'
