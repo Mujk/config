@@ -1,4 +1,4 @@
-# config
+# Config
 My config files
 
 ### System
