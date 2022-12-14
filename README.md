@@ -1,15 +1,16 @@
 # Config
 My config files
 
-### System
+### system
 - NixOS
 
-### Terminal
+### terminal
 - Alacritty &#8594; terminal emulator
+- Bash &#8594; shell
 - Elvish &#8594; shell
 - Fish &#8594; shell
 - Starship &#8594; shell prompt
 
-### TUI
+### tui
 - bat &#8594; cat replacement
 - Helix &#8594; text editor
