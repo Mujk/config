@@ -4,24 +4,30 @@ name = "rust"
 [[language]]
 name = "go"
 
-[[language]]
-name = "python"
+#[[language]]
+#name = "python"
+
+#[[language]]
+#name = "elixir"
+
+#[[language]]
+#name = "erlang"
+
+#[[language]]
+#name = "kotlin"
+
+#[[language]]
+#name = "dart"
+
+#[[langauge]]
+#name = "typescript"
+
+#[[language]]
+#name = "zig"
 
 [[language]]
-name = "elixir"
+name = "toml"
 
-[[language]]
-name = "erlang"
-
-[[language]]
-name = "kotlin"
-
-[[language]]
-name = "dart"
-
-[[langauge]]
-name = "typescript"
-
-[[language]]
-name = "latex"
+#[[language]]
+#name = "latex"
 

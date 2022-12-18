@@ -62,7 +62,7 @@
   #     };
   #   };
   # };
-  services.xserver.displayManager.lightdm.enable = true;
+  services.xserver.displayManager.sddm.enable = true;
   services.xserver.windowManager.leftwm.enable = true;
   services.xserver.windowManager.qtile.enable = true;
   
@@ -121,10 +121,13 @@
   # enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   
+  # enable flatpak support
+  # services.flatpak.enable = true;
+  
   # fonts
   fonts.fonts = with pkgs; [
       nerdfonts
-    ];
+    ];  
   
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -145,14 +148,18 @@
   neofetch # for the flex
   exa # ls replacement, same as lsd  
   elvish # powerfull shell
-  asciiquarium      
+  asciiquarium 
+  ripgrep # grep replacement
+  fd # find replacement
+  procs # ps replacement     
   #alt shells
   ion
   fish
   nushell
+  cmake
   #alt editor
-  neovim          
-
+  neovim         
+    
   # tui testing
   lf
     
@@ -174,55 +181,56 @@
   signal-desktop # messanger app
   # session-desktop # messanger app
   ungoogled-chromium # chromium web browser
-  brave
   spotify
   discord
-
+  vscode.fhs
+    
   # gaming
   steam
   superTux
   superTuxKart
-  # supertux-editor
-                            
+   
   # languages
-  rustc
-  cargo
-  rust-analyzer
+  rustup
+  #rustc
+  #cargo # package manager
+  rust-analyzer # lsp
   #advanced
-  eww
+  eww # widgets
     
   python3Full
-  python-language-server
-    
+  python-language-server # lsp
+
+  gcc
+  
   go
-  gopls
+  gopls # lsp
         
   elixir
-  elixir_ls
+  elixir_ls # lsp
     
   erlang
-  erlang-ls
+  erlang-ls # lsp
     
-  rnix-lsp
+  rnix-lsp # lsp
   
   texlive.combined.scheme-basic  
   texlab
     
   dart
-  flutter
+  flutter # framework
   
   kotlin
-  kotlin-language-server
+  kotlin-language-server # lsp
     
-  nim
-  nimlsp
-    
-  crystal
-  scry
-    
-  nodejs
-  nodePackages_latest.typescript
-  nodePackages_latest.typescript-language-server
+  #nim
+  #nimlsp # lsp
+  
+  #taplo # TOML lsp
+      
+  #nodejs
+  #nodePackages_latest.typescript
+  #nodePackages_latest.typescript-language-server
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
