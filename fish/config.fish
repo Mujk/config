@@ -14,6 +14,7 @@ if status is-interactive
     alias screen2off="xrandr --output HDMI-1 --off"
     alias screen2on="xrandr --output HDMI-1 --mode 1920x1080"
     alias resPer="sudo chmod -R a+rwX"
+    alias hx="helix"
     
     #function
     function cd --argument dir # ls after cd
@@ -23,6 +24,11 @@ if status is-interactive
             builtin cd $dir
         end
         ls
+    end
+
+    function mkdircd
+        command mkdir $argv
+        builtin cd $argv
     end
 end
 

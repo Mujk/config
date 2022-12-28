@@ -1,6 +1,9 @@
 import:
-  - ~/.config/alacritty/current-theme.yml # set theme
+  - ~/.config/alacritty/themes/catppuccin/catppuccin-mocha.yml
+
+shell:
+  program: /bin/fish
 
 window:
-  opacity: 0.8  # set transparency
+  opacity: 0.7  # set transparency
 
