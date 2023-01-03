@@ -15,7 +15,8 @@ if status is-interactive
     alias screen2on="xrandr --output HDMI-1 --mode 1920x1080"
     alias resPer="sudo chmod -R a+rwX"
     alias hx="helix"
-    
+    alias jo="joshuto"
+        
     #function
     function cd --argument dir # ls after cd
         if [ "dir" = "" ]
