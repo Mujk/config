@@ -1,9 +1,25 @@
 [character]
-success_symbol = "[ᐅ](bold green)"
-error_symbol = "[❌](bold red)"
+success_symbol = '[ᐅ ](bold green)'
+error_symbol = '[🗴 ](bold red)'
 
+[battery]
+charging_symbol = ' ⚡️'
+discharging_symbol = ' '
+unknown_symbol = ' ? '
 
-# languages
+[[battery.display]]
+threshold = 15
+style = 'bold red'
+
+[[battery.display]]  
+threshold = 35
+style = 'bold yellow'
+
+[[battery.display]] 
+threshold = 100
+style = 'bold green'
+discharging_symbol = ' '
+
 [elixir]
 format = '\[[$symbol($version \(OTP $otp_version\))]($style)\]'
 
