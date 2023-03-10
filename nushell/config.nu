@@ -20,6 +20,12 @@ alias clearPac = sudo rm /var/lib/pacman/.db.lck # arch only
 alias cheat = hx ~/Documents/cheatsheets/main-cheatsheet/README.md
 
 #functions
+def upAll[] {
+  paru
+  cargo install-update -a
+  rustup update
+}
+
 def c [dir: path] {
   cd
   ls
