@@ -1,0 +1,13 @@
+theme = "catpuccin-mocha" # have to be placed in ../helix/themes
+
+[editor]
+line-number = "relative"
+mouse = false
+
+[editor.lsp]
+display-messages = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"

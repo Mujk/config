@@ -2,7 +2,7 @@ import:
   - ~/.config/alacritty/themes/catppuccin/catppuccin-mocha.yml
 
 shell:
-  program: nu
+  program: ion
 
 window:
   opacity: 0.7  # set transparency

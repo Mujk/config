@@ -12,6 +12,10 @@ alias screen1on="xrandr --output eDP-1 --mode 1920x1080"
 alias screen2off="xrandr --output HDMI-1 --off"
 alias screen2on="xrandr --output HDMI-1 --mode 1920x1080"
 alias resPer="sudo chmod -R a+rwX"
+alias cl="clear"
+alias clearPac="sudo rm /var/lib/pacman/db.lck"
+alias s1brigth="xrandr --output eDP-1 --brightness"
+alias jo="joshuto"
 
 #function
 function cd {

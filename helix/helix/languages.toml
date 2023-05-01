@@ -1,0 +1,11 @@
+[[language]]
+name = "rust"
+
+[[language]]
+name = "python"
+
+[[language]]
+name = "toml"
+
+[[language]]
+name = "nu"

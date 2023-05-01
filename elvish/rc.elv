@@ -16,6 +16,7 @@ fn hx {|@a| e:helix $@a }
 fn cl {|@a| e:clear $@a }
 fn clearPac {|@a| e:sudo rm /var/lib/pacman/db.lck $@a }
 fn s1brigth {|@a| e:xrandr --output eDP-1 --brightness $@a}
+fn jo {|@a| e:joshuto $@a}
 
 # starship prompt
 eval (starship init elvish)
