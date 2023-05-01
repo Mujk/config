@@ -16,7 +16,7 @@ alias cl = 'clear'
 alias hx = 'helix'
 alias jo = 'joshuto'
 alias clearPac = 'sudo rm /var/lib/pacman/db.lck'
-s1bright = 'xrandr --outpt -eDP-1 --brightness'
+alias s1brigth = 'xrandr --output eDP-1 --brightness'
 
 fn cd dir 
 	if $dir -eq ""
