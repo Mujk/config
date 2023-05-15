@@ -16,6 +16,8 @@ if status is-interactive
     alias resPer="sudo chmod -R a+rwX"
     alias hx="helix"
     alias jo="joshuto"
+    alias cl="clear"
+    alias ~="~/DATA"
         
     #function
     function cd --argument dir # ls after cd
@@ -24,7 +26,7 @@ if status is-interactive
         else
             builtin cd $dir
         end
-        ls
+        exa --icons -F --group-directories-first
     end
 
     function mkdircd

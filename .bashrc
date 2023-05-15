@@ -1,5 +1,8 @@
+export EDITOR='helix'
+
 #alias
-alias ls="exa --icons -a -l -F --group-directories-first"
+alias ls="exa --icons -l -F --group-directories-first"
+alias lsa="exa --icons -a -l -F --group-directories-first"
 alias lst="exa --icons -T --group-directories-first"
 alias cat="bat"
 alias powlvl="bat /sys/class/power_supply/BAT0/capacity"
@@ -17,10 +20,11 @@ alias clearPac="sudo rm /var/lib/pacman/db.lck"
 alias s1brigth="xrandr --output eDP-1 --brightness"
 alias jo="joshuto"
 alias hx="helix"
+alias upa="paru && cargo install-update -a && rustup update"
 
 #function
 function cd {
-    builtin cd $1 && ls -F
+    builtin cd $1 && exa --icons -F --group-directories-first
     }
 
 function mkdircd {
@@ -29,3 +33,4 @@ function mkdircd {
 
 #starship prompt
 eval "$(starship init bash)"
+. "$HOME/.cargo/env"
