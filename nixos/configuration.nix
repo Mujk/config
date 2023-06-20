@@ -2,20 +2,32 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
-
+{ config, lib, pkgs, ... }:
+let
+  NAME = "Florian Mujkanovic"; # change for GH
+  EMAIL = "Mujk@proton.me"; #     "
+in
 {
   imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+    [ 
+      ./hardware-configuration.nix # Include the results of the hardware scan
+      <home-manager/nixos> # Include home manager
     ];
 
-  # Bootloader.
+  # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
-  networking.hostName = "fnix"; # Define your hostname.
+  # Setup keyfile
+  boot.initrd.secrets = {
+    "/crypto_keyfile.bin" = null;
+  };
+
+  # Enable swap on luks
+  boot.initrd.luks.devices."luks-90872624-6674-434e-af99-9769acd3939e".device = "/dev/disk/by-uuid/90872624-6674-434e-af99-9769acd3939e";
+  boot.initrd.luks.devices."luks-90872624-6674-434e-af99-9769acd3939e".keyFile = "/crypto_keyfile.bin";
+
+  networking.hostName = "flx"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -25,47 +37,35 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
-  # Enable network manager applet
-  programs.nm-applet.enable = true;
-
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.utf8";
+  i18n.defaultLocale = "en_US.UTF-8";
 
   i18n.extraLocaleSettings = {
-    LC_ADDRESS = "de_DE.utf8";
-    LC_IDENTIFICATION = "de_DE.utf8";
-    LC_MEASUREMENT = "de_DE.utf8";
-    LC_MONETARY = "de_DE.utf8";
-    LC_NAME = "de_DE.utf8";
-    LC_NUMERIC = "de_DE.utf8";
-    LC_PAPER = "de_DE.utf8";
-    LC_TELEPHONE = "de_DE.utf8";
-    LC_TIME = "de_DE.utf8";
+    LC_ADDRESS = "de_DE.UTF-8";
+    LC_IDENTIFICATION = "de_DE.UTF-8";
+    LC_MEASUREMENT = "de_DE.UTF-8";
+    LC_MONETARY = "de_DE.UTF-8";
+    LC_NAME = "de_DE.UTF-8";
+    LC_NUMERIC = "de_DE.UTF-8";
+    LC_PAPER = "de_DE.UTF-8";
+    LC_TELEPHONE = "de_DE.UTF-8";
+    LC_TIME = "de_DE.UTF-8";
   };
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable wayland
-  xdg.portal.wlr.enable = true;
-  
-  # Enable Desktop Environment.
-  # services.greetd = {
-  #   enable = true;
-  #   settings = {
-  #     default_session = {
-  #       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd leftwm";
-  #       user = "f";
-  #     };
-  #   };
-  # };
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.windowManager.leftwm.enable = true;
-  services.xserver.windowManager.qtile.enable = true;
-  
+  # Enable tlp for battery
+  services.tlp.enable = true;
+
+  # Enable the Desktop Environment.
+  services.xserver.displayManager.gdm.enable = true;
+  programs.hyprland.enable = true;
+  services.xserver.desktopManager.xfce.enable = true;
+
   # Configure keymap in X11
   services.xserver = {
     layout = "de";
@@ -78,13 +78,10 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  #opengl mainly for steam
-  hardware.opengl.driSupport32Bit = true;
-  
-  # Enabke bluetooth
+  # Enable bluetooth
   hardware.bluetooth.enable = true;
-  services.blueman.enable = true; # bluetooth gui, maybe find terminal alt
-  
+  services.blueman.enable = true;
+
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
@@ -104,147 +101,104 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
-  
+
+  # Enable virtualbox
+  virtualisation.virtualbox.host.enable = true;
+
+  # Enable Docker
+  virtualisation.docker.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.f = {
+  users.users.flx = {
     isNormalUser = true;
-    description = "F";
-    extraGroups = [ "networkmanager" "wheel" ];
-    shell = pkgs.elvish;
+    description = "flx"; # change for GH upload
+    extraGroups = [ "networkmanager" "wheel" "vboxusers" "docker" ];
     packages = with pkgs; [
+      ## browser
+      librewolf
+      firefox
+      ungoogled-chromium
+      ## email
+      thunderbird
+      ## text editor
+      neovim # to home manager
+      emacs # to home manager
+      android-studio
+      vscode-fhs
+      ## tui
+      alacritty # to home manager
+      fish # to home manager
+      bottom # htop rep (command: btm)
+      starship # shell prompt / to home manager
+      ripgrep # grep rep
+      exa # ls rep / to home manager
+      fd # find rep
+      nerdfonts
+      zellij # tmux rep
+      zoxide # cd rep
+      cmake
+      ## gui
+      keepassxc
+      anki
+      signal-desktop
+      libreoffice
+      ## wayland
+      waybar # to home manager
+      wofi # to home manager
+      ## languages
+      ### rust
+      gcc
+      clang
+
+      rustc
+      cargo
+      rustup
+      rust-analyzer
+      trunk
+      #### dioxus
+      dioxus-cli
+      #### tauri
+      cargo-tauri
+      tauri-mobile
+
+      python3Full
+      jdk
+      java-language-server
+      kotlin
+      kotlin-language-server
+      lua
+      lua-language-server
+      nil # Nix language server
+      elixir
+      elixir-ls
+      zig
+      zls
     ];
   };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # enable flakes
+  # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  
-  # enable flatpak support
-  # services.flatpak.enable = true;
-  
-  # fonts
-  fonts.fonts = with pkgs; [
-      nerdfonts
-    ];  
-  
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  wget
-  git
-  zip
-  unzip
-  greetd.greetd # minimalistic display manager
-  greetd.tuigreet # greetd / tuigreed maybe unneeded here
-  greetd.wlgreet # like greetd maybe unneeded here
-    
-  #terminal
-  alacritty # terminal emulator
-  helix # texteditor
-  starship # terminal prompt
-  bat # cat replacemant
-  neofetch # for the flex
-  exa # ls replacement, same as lsd  
-  elvish # powerfull shell
-  asciiquarium 
-  ripgrep # grep replacement
-  fd # find replacement
-  procs # ps replacement     
-  #alt shells
-  ion
-  fish
-  nushell
-  cmake
-  #alt editor
-  neovim         
-    
-  # tui testing
-  lf
-    
-  # leftwn dependencies
-  feh # image viewer
-  compton # X11 compositor
-  picom # X11 compositor   # delete one
-  polybar # status bar
-  conky # X11 system monitor  # unneeded, can be deleted
-  dmenu # app launcher
-  rofi # app launcher and window switcher
-    
-  # gui
-  gimp # image editor
-  firefox # web browser
-  librewolf # web browser, firefox fork
-  thunderbird # email client
-  keepassxc # password manager
-  signal-desktop # messanger app
-  # session-desktop # messanger app
-  ungoogled-chromium # chromium web browser
-  spotify
-  discord
-  vscode.fhs
-    
-  # gaming
-  steam
-  superTux
-  superTuxKart
-   
-  # languages
-  rustup
-  #rustc
-  #cargo # package manager
-  rust-analyzer # lsp
-  #advanced
-  eww # widgets
-    
-  python3Full
-  python-language-server # lsp
-
-  gcc
-  
-  go
-  gopls # lsp
-        
-  elixir
-  elixir_ls # lsp
-    
-  erlang
-  erlang-ls # lsp
-    
-  rnix-lsp # lsp
-  
-  texlive.combined.scheme-basic  
-  texlab
-    
-  dart
-  flutter # framework
-  
-  kotlin
-  kotlin-language-server # lsp
-    
-  #nim
-  #nimlsp # lsp
-  
-  #taplo # TOML lsp
-      
-  #nodejs
-  #nodePackages_latest.typescript
-  #nodePackages_latest.typescript-language-server
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  programs.mtr.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
 
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -258,6 +212,36 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "22.05"; # Did you read the comment?
+  system.stateVersion = "23.11"; # Did you read the comment?
 
+  home-manager.users.flx = {
+    home.stateVersion = "23.11";
+      home.packages = with pkgs; [
+        wpaperd # wallpaper daemon
+        git
+        bat # cat rep
+      ];
+      programs.git = {
+        enable = true;
+        userName = "${NAME}";
+        userEmail = "${EMAIL}";
+      };
+      #xdg.configFile."wpaperd/wallpaper.toml".source = ./wpaperd.conf;
+
+      home.file = {
+        ".config/wpaperd/wallpaper.toml" = {
+      text = ''
+      [default]
+      path = "/home/flx/DATA/pictures/wallpaper/lonely-wolf.pdf"
+      '';
+      };
+      ".config/bat/config" = {
+        text = ''
+        --theme="Catppuccin-mocha"
+        '';
+      };
+    };
+      # themes
+      xdg.configFile."bat/themes/Catppuccin-mocha.tmTheme".source = /etc/nixos/themes/bat-catppuccin-mocha.tmTheme;
+  };
 }
