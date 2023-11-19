@@ -1,0 +1,9 @@
+import:
+  - ~/.config/alacritty/tokyo-night.yml
+
+shell:
+  program: nu
+
+window:
+  opacity: 0.8
+

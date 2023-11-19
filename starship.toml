@@ -3,9 +3,9 @@ success_symbol = '[ᐅ ](bold green)'
 error_symbol = '[🗴 ](bold red)'
 
 [battery]
-charging_symbol = ' ⚡️'
-discharging_symbol = ' '
-unknown_symbol = ' ? '
+charging_symbol = '🔋⚡️'
+discharging_symbol = '🔋 '
+unknown_symbol = '🔋? '
 
 [[battery.display]]
 threshold = 15
@@ -18,16 +18,9 @@ style = 'bold yellow'
 [[battery.display]] 
 threshold = 100
 style = 'bold green'
-discharging_symbol = ' '
 
 [elixir]
 format = '\[[$symbol($version \(OTP $otp_version\))]($style)\]'
-
-[golang]
-format = '\[[$symbol($version)]($style)\]'
-
-[python]
-format = '\[[${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style)\]'
 
 [rust]
 format = '\[[$symbol($version)]($style)\]'

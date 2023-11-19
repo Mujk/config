@@ -1,0 +1,20 @@
+theme = "tokyonight_storm"
+
+[editor]
+line-number = "relative"
+idle-timeout = 0
+completion-trigger-len = 1
+scroll-lines = 1
+auto-format = true
+
+[editor.lsp]
+display-messages = true
+display-inlay-hints = true
+
+[editor.cursor-shape]
+normal = "block"
+insert = "bar"
+select = "underline"
+
+[editor.file-picker]
+hidden = false

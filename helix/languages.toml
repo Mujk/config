@@ -1,0 +1,14 @@
+[[language]]
+name = "rust"
+
+[[language]]
+name = "markdown"
+
+[[language]]
+name = "nu"
+
+[[language]]
+name = "toml"
+
+[[language]]
+name = "ron"
